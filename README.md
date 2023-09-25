@@ -2,6 +2,9 @@
     <img src="https://github.com/silvanmelchior/IncognitoPilot/blob/main/docs/title.png" alt="logo" style="width: 75%">
 </p>
 
+Try it on [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
+
+
 <p align="center"><em>An AI code interpreter for sensitive data, powered by GPT-4 or Code Llama / Llama 2.</em></p>
 
 **Incognito Pilot** combines a Large Language Model (LLM) with a Python interpreter, so it can run code and execute tasks for you.
