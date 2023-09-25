@@ -1,0 +1,38 @@
+# Image of workspace. Learn more: https://www.gitpod.io/docs/configure/workspaces/workspace-image
+image: gitpod/workspace-full:latest
+
+# List the start up tasks. Learn more: https://www.gitpod.io/docs/configure/workspaces/tasks
+tasks:
+  - name: Init Script
+    init: | # runs during prebuild => https://www.gitpod.io/docs/configure/projects/prebuilds
+        mkdir ipilot
+        cd services
+        python -m venv venv_interpreter
+        source venv_interpreter/bin/activate
+        pip install ipython
+        poetry install
+        poetry shell
+        export IPYTHON_PATH="/workspace/IncognitoPilot/services/venv_interpreter/bin/ipython" # or $(which ipython)
+        export WORKING_DIRECTORY="/workspace/IncognitoPilot/ipilot"
+        export ALLOWED_HOSTS="localhost:3000"
+        export ENABLE_CORS="TRUE"
+        export OPENAI_API_KEY=your-api-key
+        cd ui
+        npm install
+        export NEXT_PUBLIC_SERVICES_URL="http::/localhost:8000"
+  - command: cd ~/services && uvicorn main:app --reload
+  - command: cd ~/ui && npm run dev
+
+
+# List the ports to expose. Learn more: https://www.gitpod.io/docs/configure/workspaces/ports
+ports:
+  - name: Frontend
+    description: Port for the frontend
+    port: 8000
+    onOpen: open-preview
+  - name: Frontend
+    description: Port for the backend
+    port: 3000
+    onOpen: open-preview
+
+# Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
